@@ -14,15 +14,16 @@ jobs:
       - name: Ensure data folder exists
         run: mkdir -p data
 
-      - name: Fetch weather
+      - name: Fetch weather (debug)
         run: |
+          set -x
           mkdir -p data
-          curl -A "LyngbyMudderApp/1.0 (contact: example@example.com)" \
-            --noproxy '*' \
-            --proto '=https' \
-            --max-redirs 0 \
+          curl -v -L \
+            -A "LyngbyMudderApp/1.0 (contact: example@example.com)" \
             "https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=55.77&lon=12.50" \
             -o data/weather.json
+          echo "Fetch complete. File size:"
+          ls -l data/weather.json
 
 
       - name: Commit and push
