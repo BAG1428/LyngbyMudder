@@ -11,6 +11,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Ensure data folder exists
+        run: mkdir -p data
+
       - name: Fetch weather
         run: |
           curl -A "LyngbyMudderApp/1.0 (contact: example@example.com)" \
